@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/WillMW02/text-trivia-api#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "body-parser": "^1.19.2",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
