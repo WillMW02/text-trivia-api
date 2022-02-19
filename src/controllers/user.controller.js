@@ -7,7 +7,14 @@ export const getUser = (req, res, next) => {
 	// Code here finds the details of the user with the id sent through the parameter.
 }
 
-export const getUsers = (req, res, next) => {
+export const getOwnUser = (req, res, next) => {
+	// user id is held in JWT
+}
+
+export const createUser = (req, res, next) => {
 
 }
 
+export const setUserPhone = (req, res, next) => {
+	
+}
