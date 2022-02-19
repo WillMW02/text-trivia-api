@@ -3,17 +3,17 @@
 // Verify user credentials
 export const login = (req, res, next) => {
     const username = req.body.username;
-const pass = req.body.pass;
+    const pass = req.body.password;
 
-// ...
+    // ...
 
-// If valid credentials, set cookie
-res.cookie(
-    'jwt',
-    generateJWT(username),
-    {
-        httpOnly: true,
-    }
-);
-res.sendStatus(200);
+    // If valid credentials, set cookie
+    res.cookie(
+        'jwt',
+        generateJWT(username),
+        {
+            httpOnly: true,
+        }
+    );
+    res.sendStatus(200);
 }
