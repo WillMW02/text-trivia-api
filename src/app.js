@@ -16,7 +16,9 @@ app.use((req, res, next) => {
 
 app.use('/api/', ApiRouter);
 
-app.use('/user', (req, res, next) => {
+app.use('/login', (req, res, next) => {
+	let username = req.query.username;
+	let password = req.query.password
 
 })
 
