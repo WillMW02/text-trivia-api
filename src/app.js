@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import ApiRouter from './routes/api.route.js';
+import logger from './lib/logger.js';
 
 const app = express();
 
