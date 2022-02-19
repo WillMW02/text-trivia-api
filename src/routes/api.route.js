@@ -7,9 +7,9 @@ import app from '../app.js';
 
 const router = Router();
 
-app.use('/user/', UserRouter);
-app.use('/login/', LoginRouter);
-app.use('/score/', ScoreRouter);
-app.use('/question/', QuestionRouter);
+router.use('/user/', UserRouter);
+router.use('/login/', LoginRouter);
+router.use('/score/', ScoreRouter);
+router.use('/question/', QuestionRouter);
 
 export default router;
