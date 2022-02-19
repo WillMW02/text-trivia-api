@@ -7,7 +7,8 @@
   "scripts": {
     "start": "node .",
     "dev": "nodemon --watch src .",
-    "migrate:up": "node-pg-migrate migrate up"
+    "migrate:up": "node-pg-migrate -m src/migrations up",
+    "migrate:down": "node-pg-migrate -m src/migrations down"
   },
   "repository": {
     "type": "git",
