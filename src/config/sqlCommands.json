@@ -1,9 +1,9 @@
 {
 	"questions": {
 		"createQuestion": "INSERT",
-		"getQuestion": "SELECT * FROM question_log WHERE id = $1 LIMIT 1",
-		"getLatestQuestion": "SELECT * FROM question_log ORDER BY id DESC LIMIT 1",
-		"publishQuestion": ""
+		"getQuestion": "SELECT questions.question questions.answer question_log.asked_at FROM question_log INNER JOIN questions ON question_log.question_id = questions.id WHERE question_log.id = $1 LIMIT 1",
+		"getLatestQuestion": "SELECT questions.question questions.answer question_log.asked_at FROM question_log INNER JOIN questions ON question_log.question_id = questions.id ORDER BY id DESC LIMIT 1",
+		"publishQuestion": "INSERT INTO question_log (question_id) VALUES ($1);"
 	},
 	"users": {
 		"createUser": "",
