@@ -1,0 +1,7 @@
+PORT=3000
+
+DB_HOST=free-tier7.aws-eu-west-1.cockroachlabs.cloud
+DB_PORT=26257
+DB_NAME=naive-chinook-1769.defaultdb
+DB_USER=william
+DB_PASS=VICeHYpcpt5GVG7VUwNwXw
