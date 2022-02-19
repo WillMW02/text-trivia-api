@@ -3,7 +3,7 @@
 // Verify user credentials
 export const login = (req, res, next) => {
     const username = req.body.username;
-    const pass = req.body.pass;
+    const pass = req.body.password;
 
     // ...
 
