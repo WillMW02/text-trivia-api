@@ -11,6 +11,7 @@
 		"changeNumber": ""
 	},
 	"scores": {
-
+		"getScore": "SELECT SUM (points) AS total FROM score_log WHERE user_id = $1",
+		"getScores": "SELECT users.username,SUM(score_log.points) AS total FROM users, score_log WHERE users.user_id = score_log.user_id GROUP BY score_log.user_id ORDER BY total DESC LIMIT $1 OFFSET $2;"
 	}
 }

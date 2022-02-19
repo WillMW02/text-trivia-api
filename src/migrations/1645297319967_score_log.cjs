@@ -37,10 +37,10 @@ module.exports.up = pgm => {
 				}
 			}
 		},
-		answer_time: {
-			type: 'timestamp',
+		points: {
+			type: 'int',
 			notNull: true,
-			default: pgm.func('current_timestamp'),
+			default: 0,
 		}
 	});
 };
