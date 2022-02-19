@@ -1,18 +1,16 @@
 import { Router } from 'express';
 import * as UserController from '../controllers/user.controller.js';
+import { authenticateToken, csrfProtection } from '../middleware/auth.middleware.js';
 
 const router = Router();
 
-// TODO add JWT middleware
-router.get('/me', UserController.getOwnUser);
+router.get('/me', authenticateToken, UserController.getOwnUser);
 
 // ? TODO: this feature might be useful later
 router.get('/:id', UserController.getUser);
 
-// TODO add JWT & CSRF middleware
-router.post('/create', UserController.createUser);
+router.post('/create', csrfProtection, authenticateToken, UserController.createUser);
 
-// TODO add JWT & CSRF middleware
-router.post('/set-phone', UserController.setUserPhone);
+router.post('/set-phone', csrfProtection, authenticateToken, UserController.setUserPhone);
 
 export default router;
