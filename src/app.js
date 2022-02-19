@@ -14,6 +14,6 @@ app.use((req, res, next) => {
 	next();
 });
 
-app.use('/api/', ApiRouter);
+app.use('/v1/', ApiRouter);
 
 export default app;
