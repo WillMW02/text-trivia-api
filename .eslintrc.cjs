@@ -1,9 +1,7 @@
 module.exports = {
 	'env': {
 		'node': true,
-		'es2021': true,
-		'browser': true,
-		'jest': true
+		'es2021': true
 	},
 	'extends': 'eslint:recommended',
 	'parserOptions': {
@@ -26,18 +24,6 @@ module.exports = {
 		'semi': [
 			'error',
 			'always'
-		],
-		'require-jsdoc' : [
-			'error',
-			{
-				'require': {
-					'FunctionDeclaration': true,
-					'MethodDefinition': true,
-					'ClassDeclaration': false,
-					'ArrowFunctionExpression': true,
-					'FunctionExpression': true
-				}
-			}
 		],
 		'eol-last': 'error',
 		'no-var' : 'error'
