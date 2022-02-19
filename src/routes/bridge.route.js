@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import * as TwilioController from '../controllers/twilio.controller.js';
+import * as BridgeController from '../controllers/bridge.controller.js';
 
 const router = Router();
 
 // note to self - do not add CSRF, this should be authenticated internally and without JWT.
-router.post('/response', TwilioController.handleResponse);
+router.post('/response', BridgeController.handleResponse);
 
 export default router;
