@@ -20,5 +20,18 @@ export const getScore = async (id) => {
 };
 
 export const getScores = async (offset = 0, limit = 100) => {
-    // TODO
+    const client = await PgSQL.connect();
+	try {
+		const res = await client.query(
+			sqlCommands.scores.getScores,
+            limit,
+			offset
+		);
+		return res.rows;
+	} catch(err) {
+		logger.error(err, true);
+		throw new Error('An error occured whilst fetching user scores');
+	} finally {
+		if(client) client.release();
+	}
 };
