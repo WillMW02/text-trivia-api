@@ -1,11 +1,14 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import ApiRouter from './routes/api.route.js';
 import logger from './lib/logger.js';
+import * as AuthMiddleware from './middleware/auth.middleware.js';
 
 const app = express();
 
+app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(cors());
 
@@ -16,5 +19,12 @@ app.use((req, res, next) => {
 });
 
 app.use('/v1/', ApiRouter);
+
+app.get('/csrf', AuthMiddleware.csrfProtection, (req, res) => {
+	res.cookie('XSRF-TOKEN', req.csrfToken());
+	res.sendStatus(200);
+});
+
+app.use(AuthMiddleware.csrfHandler);
 
 export default app;
