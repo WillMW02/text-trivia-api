@@ -3,7 +3,7 @@ import * as UserController from '../controllers/user.controller.js';
 
 const router = Router();
 
-router.get("/", (req, res, next) => {
+router.post("/", UserController.getUser)
 
 })
 
