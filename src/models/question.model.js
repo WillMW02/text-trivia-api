@@ -12,7 +12,7 @@ export const get = async (id = null) => {
 		return res.rows[0];
 	} catch(err) {
 		logger.error(err, true);
-		throw new Error('An error occured whilst fetching a question');
+		throw new Error('An error occurred whilst fetching a question');
 	} finally {
 		if(client) client.release();
 	}
