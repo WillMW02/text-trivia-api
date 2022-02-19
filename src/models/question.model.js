@@ -17,3 +17,16 @@ export const get = async (id = null) => {
 		if(client) client.release();
 	}
 };
+
+export const publishQuestion = async (id) => {
+	const client = await PgSQL.connect();
+	try {
+		await client.query(sqlCommands.questions.publishQuestion, [id]);
+		return true;
+	} catch(err) {
+		logger.error(err, true);
+		throw new Error('An error occured whilst publishing a question');
+	} finally {
+		if(client) client.release();
+	}
+};
