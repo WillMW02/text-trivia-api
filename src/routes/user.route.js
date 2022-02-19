@@ -5,12 +5,6 @@ const router = Router();
 
 router.post("/", UserController.getUser)
 
-})
-
-router.get("/:id", (req, res, next) => {
-    const id = req.params.id
-    // Code here finds the details of the user with the id sent through the parameter.
-})
-// router.get('/example', UserController.method);
+router.get("/:id", UserController.getUsers)
 
 export default router;
