@@ -2,7 +2,7 @@ const stopStr = process.env.STOP_STRING;
 const frontend = process.env.FRONTEND_URL;
 
 export const getResponseHandler = (questionHost) => {
-	return (req, res, next) => {
+	return (req, res) => {
 		const number = req.body.number;
 		const messageResponse = req.body.response.toLowerCase();
 
