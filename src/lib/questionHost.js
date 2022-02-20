@@ -148,9 +148,9 @@ export default class QuestionHost {
 							[ user.id, this.currentQuestion.id, score ]
 						);
 
-						return 1;
+						statusCode =  1;
 					} else {
-						return 0;
+						statusCode =  0;
 					}
 				} else {
 					statusCode = -2;
