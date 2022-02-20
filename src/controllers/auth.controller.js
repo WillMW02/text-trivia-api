@@ -21,7 +21,7 @@ export const login = async (req, res, next) => {
 		if (await Auth.verifyPassword(pass, userProfile.password)) {
 			logger.info(`Password for ${userProfile.id} validated sucessfully`, true);
 			// If valid credentials, set cookie
-			const token = Auth.generateJWT(username);
+			const token = await Auth.generateJWT(userProfile.id);
 			logger.info(token, true);
 			res.cookie(
 				'jwt',

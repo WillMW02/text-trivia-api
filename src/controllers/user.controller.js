@@ -3,6 +3,7 @@ import logger from '../lib/logger.js';
 import * as UserModel from '../models/user.model.js';
 
 export const getOwnUser = async (req, res, next) => {
+	logger.info('getOwnUser INvoked', true);
 	const id = req.user.id;
 	try {
 		if(id) {
