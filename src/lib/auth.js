@@ -16,5 +16,5 @@ export const verifyJWT = async jwt => {
 	});
 };
 
-export const hashPassword = async (password) => hash(password, process.env.BCRYPT_SALT_ROUNDS);
+export const hashPassword = async (password) => hash(password, parseInt(process.env.BCRYPT_SALT_ROUNDS));
 export const verifyPassword = async (password, hashed_password) => compare(password, hashed_password);

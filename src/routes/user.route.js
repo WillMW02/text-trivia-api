@@ -9,7 +9,7 @@ router.get('/', authenticateToken, UserController.getOwnUser);
 // ? TODO: this feature might be useful later
 //router.get('/:id', UserController.getUser);
 
-router.post('/create', csrfProtection, authenticateToken, UserController.createUser);
+router.post('/create', csrfProtection, UserController.createUser);
 
 router.post('/set-phone', csrfProtection, authenticateToken, UserController.setUserPhone);
 

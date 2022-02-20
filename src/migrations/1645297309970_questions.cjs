@@ -12,7 +12,6 @@ module.exports.up = pgm => {
 		},
 		answer: {
 			type: 'string',
-			unique: true,
 			notNull: true
 		},
 		last_used: {

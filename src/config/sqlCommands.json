@@ -8,7 +8,7 @@
 	},
 	"users": {
 		"createUser": "INSERT INTO users (username, password, mobile_no) VALUES ($1, $2, $3)",
-		"getUser": "SELECT * FROM users WHERE id = $1",
+		"getUser": "SELECT id, username, mobile_no, signup_date FROM users WHERE id = $1",
 		"getUserByNumber": "SELECT * FROM users WHERE mobile_no = $1",
 		"getUsers": "SELECT * FROM users",
 		"getPassword": "SELECT id,password FROM users WHERE username = $1",
