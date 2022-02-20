@@ -4,9 +4,14 @@ import logger from '../lib/logger.js';
 import * as Auth from '../lib/auth.js'; 
 
 export const login = async (req, res, next) => {
+	if(!(req.body && req.body.username && req.body.password)) {
+		res.status(406);
+		return res.json({
+			err: 'Request body did not include required parameters'
+		});
+	}
 	const username = req.body.username;
 	const pass = req.body.password;
-
 	let client;
 	let userProfile = undefined;
 	try {
