@@ -1,0 +1,3 @@
+[submodule "src/_public"]
+	path = src/_public
+	url = git@github.com:WillMW02/text-trivia-frontend.git

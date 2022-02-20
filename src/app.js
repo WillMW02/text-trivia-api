@@ -1,6 +1,8 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
+import { join, dirname} from 'path';
+import { fileURLToPath } from 'url';
 import cors from 'cors';
 import ApiRouter from './routes/api.route.js';
 import logger from './lib/logger.js';
@@ -8,6 +10,9 @@ import { csrfHandler, csrfProtection } from './middleware/auth.middleware.js';
 import QuestionHost from './lib/questionHost.js';
 
 const app = express();
+const __dirname = fileURLToPath(dirname(import.meta.url));
+
+app.use(express.static(join(__dirname, './_public')));
 
 app.use(cookieParser());
 app.use(bodyParser.json());
