@@ -17,7 +17,7 @@ export const get = async (id) => {
 	}
 };
 
-export const getScores = async (offset = 0, limit = 100) => {
+export const getMultiple = async (offset = 0, limit = 100) => {
 	let client;
 	try {
 		client = await PgSQL.connect();
