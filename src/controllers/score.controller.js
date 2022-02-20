@@ -39,7 +39,7 @@ export const getScore = async (req, res, next) => {
 
 	try {
 		const score = await ScoreModel.get(id);
-		if(score) return return res.json(score);
+		if(score) return res.json(score);
 		res.status(404);
 		res.send();
 	} catch (e) {
