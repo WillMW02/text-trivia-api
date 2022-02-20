@@ -1,4 +1,5 @@
 import { hashPassword } from '../lib/auth.js';
+import logger from '../lib/logger.js';
 import * as UserModel from '../models/user.model.js';
 
 export const getOwnUser = async (req, res, next) => {
