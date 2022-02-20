@@ -65,9 +65,6 @@ export default class QuestionHost {
 	}
 
 	async loadQuestion() {
-		// TODO load a question from the DB
-
-		let theQuestion = undefined;
 		let client;
 		try {
 			client = await PgSQL.connect();
@@ -83,18 +80,19 @@ export default class QuestionHost {
 			if (lastQuestionTime.getTime() - currentTime.getTime() < 0) {
 				if (lastQuestionTime.setHours(0, 0, 0, 0) == currentTime.setHours(0, 0, 0, 0)) {
 					// the question has been sent, but is still accepting answers
-					theQuestion = lastQuestion;
+					this.currentQuestion = lastQuestion;
 				} else {
 					// this question has already happened, get a new question
 					res = await client.query(
 						sqlCommands.questions.getNextQuestion
 					);
-					theQuestion = res.rows[0];
+					this.currentQuestion = res.rows[0];
 				}
 			} else {
 				// this question is happening later today, let it be so
-				theQuestion = lastQuestion;
+				this.currentQuestion = lastQuestion;
 			}
+			this.questionLoadedAt = new Date();
 
 		} catch(err) {
 			logger.error(err, true);
@@ -102,12 +100,72 @@ export default class QuestionHost {
 		} finally {
 			if(client) client.release();
 		}
-
-		return theQuestion;
 	}
 
+	/*
+	  Status codes: 1-Correct, 0-Incorrect, -1-AlreadyAnswered, -2-NotAvailable, -100-NotRegistered
+	 */
 	async check(number, response) {
-		// TODO check response for correct/incorrect/already answered/not available/your number isn't registered
+		let client;
+		let statusCode;
+		// ? Absolutely no idea if this will work :P
+
+		try {
+			client = await PgSQL.connect();
+			let res = await client.query(
+				sqlCommands.users.getUserByNumber,
+				[ number ]
+			);
+
+			const user = res.rows ? res.ros[0] : undefined;
+
+			if (user) {
+				if (this.currentQuestion) {
+					res = await client.query(
+						sqlCommands.scores.getScoreForDate,
+						[ user.id, new Date().toISOString().split('T')[0] ]
+					);
+	
+					const answerForToday = res.rows ? res.rows[0] : undefined;
+	
+					if (answerForToday) {
+						return -1;
+					} else if (response == this.currentQuestion.answer) {
+
+						const delta = new Date().getTime() - this.questionLoadedAt.getTime();
+
+						let score = 0;
+						if (delta < 60000) {
+							score = 3;
+						} else if (delta < 300000) {
+							score = 2;
+						} else if (delta < 1800000) {
+							score = 1;
+						}
+
+						await client.query(
+							sqlCommands.scores.insertScore,
+							[ user.id, this.currentQuestion.id, score ]
+						);
+
+						return 1;
+					} else {
+						return 0;
+					}
+				} else {
+					statusCode = -2;
+				}
+			} else {
+				statusCode = -100;
+			}
+		} catch(err) {
+			logger.error(err, true);
+			throw new Error('An error occurred whilst checking user response');
+		} finally {
+			if(client) client.release();
+		}
+
+		return statusCode;
 	}
 
 	async endCommunications(number) {
@@ -115,7 +173,6 @@ export default class QuestionHost {
 		let didDisableUser = false;
 		try {
 			client = await PgSQL.connect();
-			// make sure we get seconds and not ms!
 			const res = await client.query(
 				sqlCommands.users.getUserByNumber,
 				[ number ]
