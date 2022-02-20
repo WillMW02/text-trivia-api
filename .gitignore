@@ -106,3 +106,6 @@ dist
 
 #Webstorm folder
 .idea/
+
+#Package lock
+.package-lock.json
