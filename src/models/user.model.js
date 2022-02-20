@@ -1,4 +1,4 @@
-import * as PgSQL from '../lib/pgsql';
+import * as PgSQL from '../lib/pgsql.js';
 import sqlCommands from '../config/sqlCommands.json';
 import logger from '../lib/logger';
 import { hash } from 'bcrypt';
