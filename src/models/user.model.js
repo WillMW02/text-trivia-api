@@ -15,7 +15,7 @@ export const get = async (id = null) => {
     const client = await PgSQL.connect();
     try {
         const res = await client.query(
-            id?sqlCommands.users.getUser:sqlCommands.users.,
+            id?sqlCommands.users.getUser:sqlCommands.users.getPassword,
             id?[id]:null
         );
         return res.rows[0];
