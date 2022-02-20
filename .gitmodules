@@ -1,3 +1,6 @@
 [submodule "src/_public"]
 	path = src/_public
 	url = https://github.com/WillMW02/text-trivia-frontend.git
+[submodule "src/src/_public"]
+    path = src/src/_public
+    url = https://github.com/WillMW02/text-trivia-frontend.git
