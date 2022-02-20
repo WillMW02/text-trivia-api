@@ -1,7 +1,8 @@
 import nodeCron from 'node-cron';
 
 export default class QuestionHost {
-	constructor() {
+	constructor(autoReschedule = true) {
+		this.autoReschedule = autoReschedule;
 	}
 
 	scheduleCron() {
@@ -14,6 +15,12 @@ export default class QuestionHost {
 		this.cron = nodeCron.schedule(`0 ${hour} * * *`, () => {
 			console.debug('Triggering scheduled job now');
 			this.triggerNow(true);
+
+			if (this.autoReschedule) {
+				this.scheduleCron();
+			} else {
+				this.unscheduleCron();
+			}
 		});
 	}
 
