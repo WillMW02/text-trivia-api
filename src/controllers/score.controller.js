@@ -16,7 +16,12 @@ export const getScores = async (req, res, next) => {
 
 };
 
+export const getOwnScore = async (req, res, next) => {
+
+}
+
 export const getScore = async (req, res, next) => {
+
 	let id = req.params.id;
 	if (id == 'me') {
 		//TODO: Add code to get the current user ID
