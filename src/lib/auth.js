@@ -1,7 +1,9 @@
 import { hash, compare } from 'bcrypt';
 import jsonwebtoken from 'jsonwebtoken';
+import logger from '../lib/logger.js';
 
 export const generateJWT = async (id, expiresIn = '2h') => {
+	logger.info(`generateJWT invoked for ${id}`);
 	const jwt = jsonwebtoken.sign({ id }, process.env.TOKEN_SECRET, {
 		expiresIn,
 	});

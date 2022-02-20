@@ -4,6 +4,7 @@ import * as Auth from '../lib/auth.js';
 
 export const login = async (req, res, next) => {
 	if(!(req.body && req.body.username && req.body.password)) {
+		logger.warn('Invalid Body on Login', true);
 		res.status(406);
 		return res.json({
 			err: 'Request body did not include required parameters'
@@ -27,6 +28,8 @@ export const login = async (req, res, next) => {
 					httpOnly: true,
 				}
 			);
+
+			logger.info(`Cookie for ${userProfile.id} set successfully`, true);
 			res.sendStatus(200);
 		} else {
 			res.status(403);
