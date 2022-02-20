@@ -30,7 +30,8 @@ export const login = async (req, res, next) => {
 			);
 
 			logger.info(`Cookie for ${userProfile.id} set successfully`, true);
-			res.sendStatus(200);
+			res.status(200);
+			res.send();
 		} else {
 			res.status(403);
 			res.send();
