@@ -16,7 +16,7 @@ export default class QuestionHost {
 		}
 
 		this.cron = nodeCron.schedule(`0 ${hour} * * *`, () => {
-			console.debug('Triggering scheduled job now');
+			logger.info('Triggering scheduled job now', true);
 			this.triggerNow(true);
 
 			if (this.autoReschedule) {
