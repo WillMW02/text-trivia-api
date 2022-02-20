@@ -1,6 +1,7 @@
 import fetch from 'node-fetch';
 
 const bridgeUrl = process.env.BRIDGE_SOURCE_URL;
+const psk = process.env.HACKY_PSK;
 
 export async function sendTwilioMessage(message, to) {
 	const response = await fetch(`${bridgeUrl}send`, {
@@ -8,6 +9,7 @@ export async function sendTwilioMessage(message, to) {
 		headers: {
 			Accept: 'application/json',
 			'Content-Type': 'application/json',
+			psk: psk
 		},
 		body: JSON.stringify({ message, to }),
 	});
