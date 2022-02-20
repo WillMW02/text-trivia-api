@@ -1,7 +1,7 @@
 const stopStr = process.env.STOP_STRING;
 const frontend = process.env.FRONTEND_URL;
 
-import QuestionHost from "../lib/questionHost";
+import QuestionHost from "../lib/questionHost.js";
 
 const questionHost = new QuestionHost();
 
