@@ -1,7 +1,6 @@
 import * as PgSQL from '../lib/pgsql';
 import sqlCommands from '../config/sqlCommands.json';
 import logger from '../lib/logger';
-import bcrypt from 'bcrypt';
 
 export const get = async (id = null) => {
 	const client = await PgSQL.connect();
