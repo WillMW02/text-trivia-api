@@ -9,3 +9,5 @@ server.listen(process.env.PORT??8080, () => {
 
 const questionHost = new QuestionHost();
 questionHost.scheduleCron();
+// the troubled one
+QuestionHost.instance = questionHost;
