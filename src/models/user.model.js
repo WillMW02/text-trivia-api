@@ -29,3 +29,16 @@ export const create = async (username, pass_hash, mobile_no) => {
 		if(client) client.release();
 	}
 };
+
+export const setNumber = async (id, mobile_no) => {
+	let client;
+	try {
+		client = await PgSQL.connect();
+		await client.query(sqlCommands.users.changeNumber, [mobile_no, id]);
+	} catch(err) {
+		logger.error(err);
+		throw new Error('An error occurred whilst changing a user contact number');
+	} finally {
+		if(client) client.release();
+	}
+};
