@@ -50,8 +50,7 @@ export default class QuestionHost {
 				// make sure we get seconds and not ms!
 				await client.query(
 					sqlCommands.questions.setLastUsed,
-					Math.floor(new Date().getTime() / 1000),
-					this.currentQuestion.id
+					[ Math.floor(new Date().getTime() / 1000), this.currentQuestion.id ]
 				);
 			} catch(err) {
 				logger.error(err, true);
@@ -112,6 +111,34 @@ export default class QuestionHost {
 	}
 
 	async endCommunications(number) {
-		// TODO set phone number to '' empty string
+		let client;
+		let didDisableUser = false;
+		try {
+			client = await PgSQL.connect();
+			// make sure we get seconds and not ms!
+			const res = await client.query(
+				sqlCommands.users.getUserByNumber,
+				[ number ]
+			);
+
+			let user = res.rows ? res.ros[0] : undefined;
+
+			if (user) {
+				// TODO check if this empty string business works :)
+				await client.query(
+					sqlCommands.users.changeNumber,
+					[ '', user.id ]
+				);
+
+				didDisableUser = true;
+			}
+		} catch(err) {
+			logger.error(err, true);
+			throw new Error('An error occurred whilst getting/updating mobile numbers');
+		} finally {
+			if(client) client.release();
+		}
+
+		return didDisableUser;
 	}
 }
