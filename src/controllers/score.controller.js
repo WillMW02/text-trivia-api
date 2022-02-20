@@ -1,4 +1,4 @@
-import * as ScoreModel from '../models/score.models.js';
+import * as ScoreModel from '../models/score.model.js';
 
 export const getScores = async (req, res, next) => {
 
