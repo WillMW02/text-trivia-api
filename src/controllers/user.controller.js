@@ -1,4 +1,3 @@
-import logger from '../lib/logger.js';
 import { hashPassword } from '../lib/auth.js';
 import * as UserModel from '../models/user.model.js';
 
