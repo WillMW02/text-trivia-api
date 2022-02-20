@@ -16,6 +16,4 @@ export const get = async (id = null) => {
 	}
 };
 
-const hashPassword = async (password) => {
-	return await hash(password, process.env.BCRYPT_SALT_ROUNDS);
-};
+const hashPassword = async (password) => hash(password, process.env.BCRYPT_SALT_ROUNDS);
