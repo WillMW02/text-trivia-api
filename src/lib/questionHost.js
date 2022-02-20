@@ -54,7 +54,7 @@ export default class QuestionHost {
 					[ Math.floor(new Date().getTime() / 1000), this.currentQuestion.id ]
 				);
 
-				const res = client.query(
+				const res = await client.query(
 					sqlCommands.users.getUsers
 				);
 				// ? Suggestion: bulk send somehow?
