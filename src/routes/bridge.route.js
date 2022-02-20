@@ -8,6 +8,6 @@ const router = Router();
 // note to self - do not add CSRF, this should be authenticated internally and without JWT.
 // ! TODO - psk auth
 // the other troubled one
-router.post('/response', validatePSK, BridgeController.getResponseHandler(QuestionHost.instance));
+router.post('/response', validatePSK, BridgeController.getResponseHandler()));
 
 export default router;
