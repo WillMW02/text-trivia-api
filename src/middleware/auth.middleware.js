@@ -21,7 +21,7 @@ export const csrfProtection = csurf({ cookie: true });
 export const csrfHandler = (err, _req, res, next) => {
 	// !!! ouch - cannot access cookie clientside if current origin =/= api origin
 	// ? return the token to be sent via header through /csrf and then store in local storage?
-	return next();
+	next();
 
 	// if (err.code !== 'EBADCSRFTOKEN') {
 	// 	return next(err);
