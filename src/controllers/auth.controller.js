@@ -23,6 +23,7 @@ export const login = async (req, res, next) => {
 	}
 
 	if (userProfile) {
+		logger.info(`pass: ${pass}, userprofilePass: ${userProfile.password}`);
 		if (await Auth.verifyPassword(pass, userProfile.password)) {
 			// If valid credentials, set cookie
 			res.cookie(
