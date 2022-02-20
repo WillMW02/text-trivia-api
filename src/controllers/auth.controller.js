@@ -1,6 +1,4 @@
-import * as PgSQL from '../lib/pgsql.js';
-import sqlCommands from '../config/sqlCommands.json';
-import UserModel from '../models/user.model.js';
+import * as UserModel from '../models/user.model.js';
 import logger from '../lib/logger.js';
 import * as Auth from '../lib/auth.js'; 
 
