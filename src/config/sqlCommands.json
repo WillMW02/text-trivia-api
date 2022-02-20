@@ -1,8 +1,8 @@
 {
 	"questions": {
 		"createQuestion": "INSERT",
-		"getQuestion": "SELECT questions.question questions.answer question_log.asked_at FROM question_log INNER JOIN questions ON question_log.question_id = questions.id WHERE question_log.id = $1 LIMIT 1",
-		"getLatestQuestion": "SELECT questions.question questions.answer question_log.asked_at FROM question_log INNER JOIN questions ON question_log.question_id = questions.id ORDER BY id DESC LIMIT 1",
+		"getQuestion": "SELECT questions.question, questions.answer, question_log.ask_time FROM question_log INNER JOIN questions ON question_log.question_id = questions.id WHERE question_log.id = $1 LIMIT 1",
+		"getLatestQuestion": "SELECT questions.question, questions.answer, question_log.ask_time FROM question_log INNER JOIN questions ON question_log.question_id = questions.id ORDER BY question_log.id DESC LIMIT 1",
 		"publishQuestion": "INSERT INTO question_log (question_id) VALUES ($1);"
 	},
 	"users": {
