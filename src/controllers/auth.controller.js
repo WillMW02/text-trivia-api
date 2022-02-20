@@ -11,6 +11,7 @@ export const login = async (req, res, next) => {
 			err: 'Request body did not include required parameters'
 		});
 	}
+
 	const username = req.body.username;
 	const pass = req.body.password;
 
@@ -19,6 +20,7 @@ export const login = async (req, res, next) => {
 	if (userProfile) {
 		logger.info(`pass: ${pass}, userprofilePass: ${userProfile.password}`, true);
 		if (await Auth.verifyPassword(pass, userProfile.password)) {
+			logger.info(`Password for ${userProfile.id} validated sucessfully`, true);
 			// If valid credentials, set cookie
 			res.cookie(
 				'jwt',
