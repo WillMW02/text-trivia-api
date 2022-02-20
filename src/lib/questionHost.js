@@ -2,6 +2,7 @@ import * as PgSQL from '../lib/pgsql.js';
 import sqlCommands from '../config/sqlCommands.json';
 import logger from '../lib/logger.js';
 import nodeCron from 'node-cron';
+import { sendTwilioMessage } from './bridgeSource.js';
 
 export default class QuestionHost {
 	// !!! ABSOLUTELY DISGUSTING BUT WE HAVE 6 HOURS AND I'M SO TIRED
@@ -52,6 +53,14 @@ export default class QuestionHost {
 					sqlCommands.questions.setLastUsed,
 					[ Math.floor(new Date().getTime() / 1000), this.currentQuestion.id ]
 				);
+
+				const res = client.query(
+					sqlCommands.users.getUsers
+				);
+				// ? Suggestion: bulk send somehow?
+				for (let user of res.rows) {
+					await sendTwilioMessage(this.currentQuestion.question, user.mobile_no);
+				}
 			} catch(err) {
 				logger.error(err, true);
 				throw new Error('An error occurred whilst updating the question time');

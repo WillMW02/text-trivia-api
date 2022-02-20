@@ -5,8 +5,8 @@ import { csrfProtection } from '../middleware/auth.middleware.js';
 
 const router = Router();
 
-router.post('/login', csrfProtection, AuthController.login);
+router.post('/login', AuthController.login);
 
-router.post('/logout', csrfProtection, AuthController.logout);
+router.post('/logout', AuthController.logout);
 
 export default router;

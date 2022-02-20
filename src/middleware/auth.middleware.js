@@ -19,9 +19,13 @@ export const authenticateToken = async (req, res, next) => {
 export const csrfProtection = csurf({ cookie: true });
 
 export const csrfHandler = (err, _req, res, next) => {
-	if (err.code !== 'EBADCSRFTOKEN') {
-		return next(err);
-	}
+	// !!! ouch - cannot access cookie clientside if current origin =/= api origin
+	// ? return the token to be sent via header through /csrf and then store in local storage?
+	next();
+
+	// if (err.code !== 'EBADCSRFTOKEN') {
+	// 	return next(err);
+	// }
   
-	return res.status(403).json({ status: 403, message: 'Invalid or missing CSRF token' });
+	// return res.status(403).json({ status: 403, message: 'Invalid or missing CSRF token' });
 };

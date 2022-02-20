@@ -5,6 +5,7 @@ import cors from 'cors';
 import ApiRouter from './routes/api.route.js';
 import logger from './lib/logger.js';
 import { csrfHandler, csrfProtection } from './middleware/auth.middleware.js';
+import QuestionHost from './lib/questionHost.js';
 
 const app = express();
 
@@ -26,5 +27,14 @@ app.get('/csrf', csrfProtection, (req, res) => {
 });
 
 app.use(csrfHandler);
+
+const questionHost = new QuestionHost();
+questionHost.scheduleCron();
+
+app.get('/invoke', (req, res, next) => {
+	questionHost.triggerNow(true);
+});
+// the troubled one
+QuestionHost.instance = questionHost;
 
 export default app;

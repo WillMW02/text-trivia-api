@@ -1,4 +1,5 @@
 import { hashPassword } from '../lib/auth.js';
+import logger from '../lib/logger.js';
 import * as UserModel from '../models/user.model.js';
 
 export const getOwnUser = async (req, res, next) => {
@@ -33,7 +34,9 @@ export const createUser = async (req, res, next) => {
 		const pass_hash = await hashPassword(req.body.password);
 
 		await UserModel.create(req.body.username, pass_hash, req.body.mobile_no);
-		res.send();
+		res.json({
+			success: true
+		});
 	} catch(err) {
 		res.status(500);
 		res.send();
@@ -58,7 +61,9 @@ export const setUserPhone = async(req, res, next) => {
 	try {
 		await UserModel.setNumber(req.user.id, req.body.mobile_no);
 
-		res.send();
+		res.json({
+			success: true
+		});
 	} catch(err) {
 		res.status(500);
 		res.send();
