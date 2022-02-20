@@ -4,8 +4,9 @@ import logger from '../lib/logger.js';
 
 
 export const get = async (id) => {
-	const client = await PgSQL.connect();
+	let client;
 	try {
+		client = await PgSQL.connect();
 		const res = await client.query(sqlCommands.scores.getScore, [id]);
 		return res.rows[0];
 	} catch(err) {
@@ -16,9 +17,10 @@ export const get = async (id) => {
 	}
 };
 
-export const getMultiple = async (offset = 0, limit = 100) => {
-	const client = await PgSQL.connect();
+export const getScores = async (offset = 0, limit = 100) => {
+	let client;
 	try {
+		client = await PgSQL.connect();
 		const res = await client.query(sqlCommands.scores.getScores, [limit, offset]);
 		return res.rows;
 	} catch(err) {
