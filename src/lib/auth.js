@@ -1,3 +1,4 @@
+import { hash, compare } from 'bcrypt';
 import jsonwebtoken from 'jsonwebtoken';
 
 export const generateJWT = async (id, expiresIn = '2h') => {
@@ -14,3 +15,6 @@ export const verifyJWT = async jwt => {
 		});
 	});
 };
+
+export const hashPassword = async (password) => hash(password, process.env.BCRYPT_SALT_ROUNDS);
+export const verifyPassword = async (password, hashed_password) => compare(password, hashed_password);

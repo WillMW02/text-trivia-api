@@ -1,7 +1,6 @@
 import * as PgSQL from '../lib/pgsql';
 import sqlCommands from '../config/sqlCommands.json';
 import logger from '../lib/logger';
-import { hash } from 'bcrypt';
 
 export const get = async (id = null) => {
 	let client;
@@ -30,5 +29,3 @@ export const create = async (username, pass_hash, mobile_no) => {
 		if(client) client.release();
 	}
 };
-
-const hashPassword = async (password) => hash(password, process.env.BCRYPT_SALT_ROUNDS);
