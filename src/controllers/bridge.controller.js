@@ -1,7 +1,11 @@
 const stopStr = process.env.STOP_STRING;
 const frontend = process.env.FRONTEND_URL;
 
-export const getResponseHandler = (questionHost) => {
+import QuestionHost from "../lib/questionHost";
+
+const questionHost = new QuestionHost();
+
+export const getResponseHandler = () => {
 	return async (req, res) => {
 		const number = req.body.number;
 		const messageResponse = req.body.response.toLowerCase();
