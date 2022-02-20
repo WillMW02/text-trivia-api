@@ -17,8 +17,6 @@ export async function sendTwilioMessage(message, to) {
 		body: JSON.stringify({ message, to }),
 	});
 
-	logger.info(JSON.stringify(await response.text()));
-
-	//const responseData = await response.json();
+	const responseData = await response.json();
 	return responseData ? responseData.success : false;
 }
