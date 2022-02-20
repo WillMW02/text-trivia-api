@@ -4,7 +4,7 @@ export const getScores = async (req, res, next) => {
 
 	try {
 		const scores = await ScoreModel.getMultiple();
-		if(scores) res.json(scores);
+		if(scores) return res.json(scores);
 		res.status(404);
 		res.send();
 	} catch(e) {
@@ -22,7 +22,7 @@ export const getOwnScore = async (req, res, next) => {
 	try {
 		if(id) {
 			const dat = await ScoreModel.get(id);
-			if(dat) res.json(dat);
+			if(dat) return res.json(dat);
 		}
 		res.status(404);
 		res.send();
@@ -39,7 +39,7 @@ export const getScore = async (req, res, next) => {
 
 	try {
 		const score = await ScoreModel.get(id);
-		if(score) res.json(score);
+		if(score) return return res.json(score);
 		res.status(404);
 		res.send();
 	} catch (e) {
