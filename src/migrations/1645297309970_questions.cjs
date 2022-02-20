@@ -14,6 +14,11 @@ module.exports.up = pgm => {
 			type: 'string',
 			unique: true,
 			notNull: true
+		},
+		last_used: {
+			type: 'timestamp',
+			notNull: true,
+			default: pgm.func('to_timestamp(0)')
 		}
 	});
 };
