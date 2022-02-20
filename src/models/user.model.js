@@ -4,8 +4,9 @@ import logger from '../lib/logger';
 import { hash } from 'bcrypt';
 
 export const get = async (id = null) => {
-	const client = await PgSQL.connect();
+	let client;
 	try {
+		client = await PgSQL.connect();
 		const res = await client.query(sqlCommands.users.getUser, [id]);
 		return res.rows[0];
 	} catch(err) {
