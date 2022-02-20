@@ -3,8 +3,9 @@ import sqlCommands from '../config/sqlCommands.json';
 import logger from '../lib/logger.js';
 
 export const get = async (id = null) => {
-	const client = await PgSQL.connect();
+	let client;
 	try {
+		client = await PgSQL.connect();
 		const res = await client.query(
 			id?sqlCommands.questions.getQuestion:sqlCommands.questions.getLatestQuestion, 
 			id?[id]:null
@@ -19,8 +20,9 @@ export const get = async (id = null) => {
 };
 
 export const publish = async (id) => {
-	const client = await PgSQL.connect();
+	let client;
 	try {
+		client = await PgSQL.connect();
 		await client.query(sqlCommands.questions.publishQuestion, [id]);
 		return true;
 	} catch(err) {
