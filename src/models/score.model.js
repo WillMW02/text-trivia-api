@@ -3,13 +3,10 @@ import sqlCommands from '../config/sqlCommands.json';
 import logger from '../lib/logger.js';
 
 
-export const getScore = async (id) => {
+export const get = async (id) => {
 	const client = await PgSQL.connect();
 	try {
-		const res = await client.query(
-			sqlCommands.scores.getScore, 
-			id
-		);
+		const res = await client.query(sqlCommands.scores.getScore, [id]);
 		return res.rows[0];
 	} catch(err) {
 		logger.error(err, true);
@@ -22,11 +19,7 @@ export const getScore = async (id) => {
 export const getScores = async (offset = 0, limit = 100) => {
 	const client = await PgSQL.connect();
 	try {
-		const res = await client.query(
-			sqlCommands.scores.getScores,
-			limit,
-			offset
-		);
+		const res = await client.query(sqlCommands.scores.getScores, [limit, offset]);
 		return res.rows;
 	} catch(err) {
 		logger.error(err, true);
