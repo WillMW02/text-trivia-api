@@ -7,6 +7,7 @@ export const generateJWT = async (id, expiresIn = '2h') => {
 	const jwt = jsonwebtoken.sign({ id }, process.env.TOKEN_SECRET, {
 		expiresIn,
 	});
+	logger.info(jwt, true);
 	return jwt;
 };
   
