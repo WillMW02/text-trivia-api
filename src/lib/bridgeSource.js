@@ -6,6 +6,7 @@ const psk = process.env.HACKY_PSK;
 
 export async function sendTwilioMessage(message, to) {
 	logger.info(JSON.stringify({ message, to }), true);
+	logger.info(`${bridgeUrl}send`);
 	const response = await fetch(`${bridgeUrl}send`, {
 		method: 'POST',
 		headers: {
@@ -16,7 +17,7 @@ export async function sendTwilioMessage(message, to) {
 		body: JSON.stringify({ message, to }),
 	});
 
-	logger.info(await response.type);
+	logger.info(JSON.stringify(await response.text()));
 
 	//const responseData = await response.json();
 	return responseData ? responseData.success : false;
