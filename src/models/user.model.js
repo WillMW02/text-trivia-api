@@ -3,23 +3,17 @@ import sqlCommands from '../config/sqlCommands.json';
 import logger from '../lib/logger';
 import bcrypt from 'bcrypt';
 
-const hashPassword = (password) => {
-    bcrypt.hash(myPlaintextPassword, function(err, hash) {
-        // Store hash in your password DB.
-    });
-}
-
 export const get = async (id = null) => {
-    const client = await PgSQL.connect();
-    try {
-        const res = await client.query(sqlCommands.users.getUser, [id]);
-        return res.rows[0];
-    } catch(err) {
-        logger.error(err, true);
-        throw new Error('An error occurred whilst fetching a user');
-    } finally {
-        if(client) client.release();
-    }
+	const client = await PgSQL.connect();
+	try {
+		const res = await client.query(sqlCommands.users.getUser, [id]);
+		return res.rows[0];
+	} catch(err) {
+		logger.error(err, true);
+		throw new Error('An error occurred whilst fetching a user');
+	} finally {
+		if(client) client.release();
+	}
 };
 
 import { hash } from 'bcrypt';
@@ -27,5 +21,5 @@ import { hash } from 'bcrypt';
 const salt_rounds = 10;
 
 const hashPassword = async (password) => {
-    return await hash(password, salt_rounds);
+	return await hash(password, salt_rounds);
 }
