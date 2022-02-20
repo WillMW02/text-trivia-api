@@ -106,4 +106,12 @@ export default class QuestionHost {
 
 		return theQuestion;
 	}
+
+	async check(number, response) {
+		// TODO check response for correct/incorrect/already answered/not available/your number isn't registered
+	}
+
+	async endCommunications(number) {
+		// TODO set phone number to '' empty string
+	}
 }
