@@ -17,7 +17,7 @@ export const getScores = async (req, res, next) => {
 };
 
 export const getOwnScore = async (req, res, next) => {
-
+	
 }
 
 export const getScore = async (req, res, next) => {
