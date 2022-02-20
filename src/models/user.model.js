@@ -42,3 +42,19 @@ export const setNumber = async (id, mobile_no) => {
 		if(client) client.release();
 	}
 };
+
+export const getPassword = async (username) => {
+	let client;
+	try {
+		client = await PgSQL.connect();
+		const res = await client.query(
+			sqlCommands.users.getPassword, [username]
+		);
+		if(res.rows) return res.rows[0];
+	} catch(err) {
+		logger.error(err, true);
+		throw new Error('An error occurred whilst getting user password');
+	} finally {
+		if(client) client.release();
+	}
+}
