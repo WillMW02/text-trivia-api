@@ -4,10 +4,10 @@ import { authenticateToken, csrfProtection } from '../middleware/auth.middleware
 
 const router = Router();
 
-router.get('/me', authenticateToken, UserController.getOwnUser);
+router.get('/', authenticateToken, UserController.getOwnUser);
 
 // ? TODO: this feature might be useful later
-router.get('/:id', UserController.getUser);
+//router.get('/:id', UserController.getUser);
 
 router.post('/create', csrfProtection, authenticateToken, UserController.createUser);
 
