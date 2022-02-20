@@ -37,6 +37,11 @@ module.exports.up = pgm => {
 			type: 'int',
 			notNull: true,
 			default: 0,
+		},
+		answer_date: {
+			type: 'date',
+			notNull: true,
+			default: pgm.func('current_date')
 		}
 	});
 };
