@@ -1,20 +1,46 @@
+import * as PgSQL from '../lib/pgsql.js';
+import sqlCommands from '../config/sqlCommands.json';
+import logger from '../lib/logger.js';
 import * as Auth from '../lib/auth.js'; 
 
-export const login = (req, res, next) => {
+export const login = async (req, res, next) => {
 	const username = req.body.username;
 	const pass = req.body.password;
 
-	// TODO: Add credential verification
+	let client;
+	let userProfile = undefined;
+	try {
+		client = await PgSQL.connect();
+		const res = await client.query(
+			sqlCommands.users.getPassword, [username]
+		);
+		userProfile = res.rows ? res.rows[0] : undefined;
+	} catch(err) {
+		logger.error(err, true);
+		throw new Error('An error occurred whilst getting user password');
+	} finally {
+		if(client) client.release();
+	}
 
-	// If valid credentials, set cookie
-	res.cookie(
-		'jwt',
-		Auth.generateJWT(username),
-		{
-			httpOnly: true,
+	if (userProfile) {
+		if (await Auth.verifyPassword(pass, userProfile.password)) {
+			// If valid credentials, set cookie
+			res.cookie(
+				'jwt',
+				Auth.generateJWT(username),
+				{
+					httpOnly: true,
+				}
+			);
+			res.sendStatus(200);
+		} else {
+			res.status(403);
+			res.send();
 		}
-	);
-	res.sendStatus(200);
+	} else {
+		res.status(404);
+		res.send();
+	}
 };
 
 export const logout = (req, res, next) => {
