@@ -5,9 +5,10 @@ import * as UserModel from '../models/user.model.js';
 export const getOwnUser = async (req, res, next) => {
 	const id = req.user.id;
 	try {
-		if(!id) throw new Error('No user ID could be found');
-		const dat = await UserModel.get(id);
-		if(dat) res.json(dat);
+		if(id) {
+			const dat = await UserModel.get(id);
+			if(dat) res.json(dat);
+		}
 		res.status(404);
 		res.send();
 	} catch(err) {
