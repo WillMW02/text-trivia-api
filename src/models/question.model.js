@@ -18,7 +18,7 @@ export const get = async (id = null) => {
 	}
 };
 
-export const publishQuestion = async (id) => {
+export const publish = async (id) => {
 	const client = await PgSQL.connect();
 	try {
 		await client.query(sqlCommands.questions.publishQuestion, [id]);
