@@ -58,8 +58,8 @@ export default class QuestionHost {
 					sqlCommands.users.getUsers
 				);
 				// ? Suggestion: bulk send somehow?
-				for (let user of res.rows) {
-					await sendTwilioMessage(this.currentQuestion.question, user.mobile_no);
+				for (let i = 0; i < res.rows.length; i++) {
+					await sendTwilioMessage(this.currentQuestion.question, res.rows[i].mobile_no);
 				}
 			} catch(err) {
 				logger.error(err, true);
