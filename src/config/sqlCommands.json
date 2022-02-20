@@ -1,9 +1,10 @@
 {
 	"questions": {
 		"createQuestion": "INSERT",
-		"getQuestion": "SELECT questions.question, questions.answer, question_log.ask_time FROM question_log INNER JOIN questions ON question_log.question_id = questions.id WHERE question_log.id = $1 LIMIT 1",
-		"getLatestQuestion": "SELECT questions.question, questions.answer, question_log.ask_time FROM question_log INNER JOIN questions ON question_log.question_id = questions.id ORDER BY question_log.id DESC LIMIT 1",
-		"publishQuestion": "INSERT INTO question_log (question_id) VALUES ($1);"
+		"getQuestion": "SELECT * FROM questions WHERE question_log.id = $1 LIMIT 1",
+		"getNextQuestion": "SELECT * FROM questions ORDER BY last_used ASC LIMIT 1",
+		"getLastQuestion": "SELECT * FROM questions ORDER BY last_used DESC LIMIT 1",
+		"setLastUsed": "UPDATE questions SET last_used = to_timestamp($1) WHERE id = $2"
 	},
 	"users": {
 		"createUser": "",
