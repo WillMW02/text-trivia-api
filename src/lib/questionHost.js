@@ -4,6 +4,9 @@ import logger from '../lib/logger.js';
 import nodeCron from 'node-cron';
 
 export default class QuestionHost {
+	// !!! ABSOLUTELY DISGUSTING BUT WE HAVE 6 HOURS AND I'M SO TIRED
+	static instance = undefined;
+
 	constructor(autoReschedule = true) {
 		this.autoReschedule = autoReschedule;
 	}
