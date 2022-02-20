@@ -17,6 +17,7 @@ export const getScores = async (req, res, next) => {
 };
 
 export const getOwnScore = async (req, res, next) => {
+
 	const id = req.user.id;
 
 	try {
