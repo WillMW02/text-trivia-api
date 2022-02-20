@@ -1,6 +1,6 @@
 import * as PgSQL from '../lib/pgsql.js';
 import sqlCommands from '../config/sqlCommands.json';
-import logger from '../lib/logger';
+import logger from '../lib/logger.js';
 import { hash } from 'bcrypt';
 
 export const get = async (id = null) => {
