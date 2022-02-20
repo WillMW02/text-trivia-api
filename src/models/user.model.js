@@ -1,6 +1,7 @@
 import * as PgSQL from '../lib/pgsql';
 import sqlCommands from '../config/sqlCommands.json';
 import logger from '../lib/logger';
+import { hash } from 'bcrypt';
 
 export const get = async (id = null) => {
 	const client = await PgSQL.connect();
@@ -15,10 +16,4 @@ export const get = async (id = null) => {
 	}
 };
 
-import { hash } from 'bcrypt';
-
-const salt_rounds = 10;
-
-const hashPassword = async (password) => {
-	return await hash(password, salt_rounds);
-}
+const hashPassword = async (password) => hash(password, process.env.BCRYPT_SALT_ROUNDS);

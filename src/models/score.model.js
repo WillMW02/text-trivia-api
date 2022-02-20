@@ -4,7 +4,7 @@ import logger from '../lib/logger.js';
 
 
 export const getScore = async (id) => {
-    const client = await PgSQL.connect();
+	const client = await PgSQL.connect();
 	try {
 		const res = await client.query(
 			sqlCommands.scores.getScore, 
@@ -20,11 +20,11 @@ export const getScore = async (id) => {
 };
 
 export const getScores = async (offset = 0, limit = 100) => {
-    const client = await PgSQL.connect();
+	const client = await PgSQL.connect();
 	try {
 		const res = await client.query(
 			sqlCommands.scores.getScores,
-            limit,
+			limit,
 			offset
 		);
 		return res.rows;
