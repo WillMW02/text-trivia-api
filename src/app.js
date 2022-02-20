@@ -19,12 +19,12 @@ app.use((req, res, next) => {
 });
 
 app.use('/v1/', ApiRouter);
-
+/*
 app.get('/csrf', csrfProtection, (req, res) => {
 	res.cookie('XSRF-TOKEN', req.csrfToken());
 	res.sendStatus(200);
 });
 
 app.use(csrfHandler);
-
+*/
 export default app;
