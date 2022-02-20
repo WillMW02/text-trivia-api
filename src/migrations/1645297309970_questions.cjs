@@ -4,11 +4,7 @@ module.exports.shorthands = undefined;
 
 module.exports.up = pgm => {
 	pgm.createTable('questions', {
-		id: { 
-			type: 'int', 
-			primaryKey: true, 
-			autoIncrement: true 
-		},
+		id: 'id',
 		question: {
 			type: 'string',
 			unique: true,
