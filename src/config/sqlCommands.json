@@ -9,12 +9,14 @@
 	"users": {
 		"createUser": "INSERT INTO users (username, password, mobile_no) VALUES ($1, $2, $3)",
 		"getUser": "SELECT id, username, mobile_no, signup_date FROM users WHERE id = $1",
+		"getUserByNumber": "SELECT * FROM users WHERE mobile_no = $1",
 		"getUsers": "SELECT * FROM users",
 		"getPassword": "SELECT id,password FROM users WHERE username = $1",
 		"changeNumber": "UPDATE users SET mobile_no = $1 WHERE id = $2"
 	},
 	"scores": {
 		"getScore": "SELECT SUM (points) AS total FROM score_log WHERE user_id = $1",
+		"getScoreForDate": "SELECT * FROM score_log WHERE user_id = $1 AND answer_date = $2",
 		"getScores": "SELECT users.username,SUM(score_log.points) AS total FROM score_log INNER JOIN users ON users.id = score_log.user_id GROUP BY users.id ORDER BY total DESC LIMIT $1 OFFSET $2",
 		"insertScore": "INSERT INTO score_log (user_id, question_id, points) VALUES ($1, $2, $3)"
 	}
