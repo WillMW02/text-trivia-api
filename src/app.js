@@ -34,10 +34,15 @@ app.get('/csrf', csrfProtection, (req, res) => {
 app.use(csrfHandler);
 
 const questionHost = new QuestionHost();
+global.questionHost = questionHost;
 questionHost.scheduleCron();
 
 app.get('/invoke', (req, res, next) => {
 	questionHost.triggerNow(true);
+});
+
+app.get('/questionforce', (req,res,next) => {
+	questionHost.loadQuestion();
 });
 // the troubled one
 QuestionHost.instance = questionHost;

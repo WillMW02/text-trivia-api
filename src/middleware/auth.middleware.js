@@ -9,7 +9,9 @@ export const authenticateToken = async (req, res, next) => {
 	}
   
 	const { err, user } = await Auth.verifyJWT(jwt);
-  
+	
+	console.log()
+
 	if (err) return res.status(401).json({ status: 401, message: 'Invalid JWT sent' });
 	req.user = user;
   

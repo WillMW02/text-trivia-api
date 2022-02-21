@@ -126,7 +126,7 @@ export default class QuestionHost {
 				[ number ]
 			);
 
-			const user = res.rows ? res.ros[0] : undefined;
+			const user = res.rows ? res.rows[0] : undefined;
 
 			if (user) {
 				if (this.currentQuestion) {
